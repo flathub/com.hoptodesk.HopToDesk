@@ -1,0 +1,99 @@
+name: Auto‑update & Build HopToDesk Flatpak
+
+on:
+  schedule:
+    # daily at midnight UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  update-manifest:
+    name: 🚀 Check for new HopToDesk release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.vars.outputs.version }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Download latest HopToDesk .deb
+        run: |
+          curl -L -o hoptodesk.deb https://www.hoptodesk.com/hoptodesk.deb
+
+      - name: Extract version & SHA256
+        id: vars
+        run: |
+          VERSION=$(dpkg-deb -f hoptodesk.deb Version | cut -d'-' -f1)
+          SHA256=$(sha256sum hoptodesk.deb | cut -d' ' -f1)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "sha256=$SHA256" >> $GITHUB_OUTPUT
+
+      - name: Bump Flatpak manifest
+        run: |
+          sed -i -E \
+            "s#hoptodesk-[0-9]+\.[0-9]+\.[0-9]+-0-x86_64\.deb#hoptodesk-${{ steps.vars.outputs.version }}-0-x86_64.deb#" \
+            com.hoptodesk.HopToDesk.json
+          sed -i -E \
+            "s#\"sha256\": \"[0-9a-f]+\"#\"sha256\": \"${{ steps.vars.outputs.sha256 }}\"#" \
+            com.hoptodesk.HopToDesk.json
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update-hoptodesk-${{ steps.vars.outputs.version }}
+          title: "Update HopToDesk to v${{ steps.vars.outputs.version }}"
+          body: |
+            Automated update of HopToDesk Flatpak manifest to version \
+            **${{ steps.vars.outputs.version }}**.
+          labels: automated-update
+
+  build-flatpak:
+    name: 🧪 Validate Flatpak build
+    needs: update-manifest
+    if: github.event_name != 'schedule'   # only run on push / PR, not on schedule
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [ x86_64, aarch64 ]
+        distro: [ ubuntu18.04, ubuntu22.04 ]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup QEMU for multi‑arch
+        uses: docker/setup-qemu-action@v2
+
+      - name: Build HopToDesk Flatpak on ${{ matrix.arch }}
+        uses: rustdesk-org/run-on-arch-action@amd64-support
+        with:
+          arch: ${{ matrix.arch }}
+          distro: ${{ matrix.distro }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          setup: |
+            ls -lha
+          dockerRunArgs: |
+            --volume "${PWD}:/workspace"
+          install: |
+            apt-get update && apt-get install -y \
+              git flatpak flatpak-builder
+          run: |
+            set -e
+            cd /workspace
+            # bring in shared modules
+            git clone https://github.com/flathub/shared-modules.git --depth=1
+            # ensure Flathub remote
+            flatpak remote-add --if-not-exists flathub \
+              https://dl.flathub.org/repo/flathub.flatpakrepo
+            # build the manifest
+            flatpak-builder \
+              --force-clean \
+              --install-deps-from=flathub \
+              --user \
+              --repo=repo \
+              build-dir \
+              com.hoptodesk.HopToDesk.json
