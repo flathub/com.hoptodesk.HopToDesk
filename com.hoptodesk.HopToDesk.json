@@ -1,10 +1,10 @@
 {
-  "id": "com.hoptodesk.HopToDesk",
-  "runtime": "org.freedesktop.Platform",
-  "runtime-version": "23.08",
-  "sdk": "org.freedesktop.Sdk",
-  "command": "hoptodesk",
-  "finish-args": [
+  "id":"com.hoptodesk.HopToDesk",
+  "runtime":"org.freedesktop.Platform",
+  "runtime-version":"23.08",
+  "sdk":"org.freedesktop.Sdk",
+  "command":"hoptodesk",
+  "finish-args":[
     "--share=ipc",
     "--socket=x11",
     "--share=network",
@@ -12,7 +12,7 @@
     "--device=dri",
     "--socket=pulseaudio"
   ],
-  "modules": [
+  "modules":[
     "shared-modules/libappindicator/libappindicator-gtk3-12.10.json",
     {
       "name": "xdotool",
