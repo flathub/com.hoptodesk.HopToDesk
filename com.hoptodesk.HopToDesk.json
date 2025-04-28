@@ -90,6 +90,5 @@
         "install -Dm644 logo.svg /app/share/icons/hicolor/scalable/apps/com.hoptodesk.HopToDesk.svg"
       ]
     }
-  ],
-  "version": "1.43.1"
+  ]
 }
