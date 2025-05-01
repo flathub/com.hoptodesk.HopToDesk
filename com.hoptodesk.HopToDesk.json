@@ -1,10 +1,10 @@
 {
-  "id" : "com.hoptodesk.HopToDesk",
-  "runtime" : "org.freedesktop.Platform",
-  "runtime-version" : "23.08",
-  "sdk" : "org.freedesktop.Sdk",
-  "command" : "hoptodesk",
-  "finish-args" : [
+  "id": "com.hoptodesk.HopToDesk",
+  "runtime": "org.freedesktop.Platform",
+  "runtime-version": "23.08",
+  "sdk": "org.freedesktop.Sdk",
+  "command": "hoptodesk",
+  "finish-args": [
     "--share=ipc",
     "--socket=x11",
     "--share=network",
@@ -12,77 +12,77 @@
     "--device=dri",
     "--socket=pulseaudio"
   ],
-  "modules" : [
+  "modules": [
     "shared-modules/libappindicator/libappindicator-gtk3-12.10.json",
     {
       "name": "xdotool",
       "no-autogen": true,
       "make-args": [
-          "WITHOUT_RPATH_FIX=1"
+        "WITHOUT_RPATH_FIX=1"
       ],
       "make-install-args": [
-          "PREFIX=${FLATPAK_DEST}",
-          "INSTALLMAN=${FLATPAK_DEST}/share/man"
+        "PREFIX=${FLATPAK_DEST}",
+        "INSTALLMAN=${FLATPAK_DEST}/share/man"
       ],
       "sources": [
-          {
-              "type": "archive",
-              "url": "https://github.com/jordansissel/xdotool/archive/v3.20211022.1/xdotool-3.20211022.1.tar.gz",
-              "sha256": "82b15a944a5e82fee15e0f6116bd9f642bc3d0bb6989fc0ca5ad9dfe35de0847",
-              "x-checker-data": {
-                  "type": "anitya",
-                  "project-id": 8648,
-                  "stable-only": true,
-                  "url-template": "https://github.com/jordansissel/xdotool/archive/v$version/xdotool-$version.tar.gz"
-              }
+        {
+          "type": "archive",
+          "url": "https://github.com/jordansissel/xdotool/archive/v3.20211022.1/xdotool-3.20211022.1.tar.gz",
+          "sha256": "82b15a944a5e82fee15e0f6116bd9f642bc3d0bb6989fc0ca5ad9dfe35de0847",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 8648,
+            "stable-only": true,
+            "url-template": "https://github.com/jordansissel/xdotool/archive/v$version/xdotool-$version.tar.gz"
           }
+        }
       ],
       "cleanup": [
-          "/share/man"
+        "/share/man"
       ]
     },
     {
-      "name" : "libpam",
-      "buildsystem" : "autotools",
-      "sources" : [
+      "name": "libpam",
+      "buildsystem": "autotools",
+      "sources": [
         {
-          "url" : "https://github.com/linux-pam/linux-pam/releases/download/v1.6.1/Linux-PAM-1.6.1.tar.xz",
-          "sha256" : "f8923c740159052d719dbfc2a2f81942d68dd34fcaf61c706a02c9b80feeef8e",
-          "type" : "archive"
+          "url": "https://github.com/linux-pam/linux-pam/releases/download/v1.6.1/Linux-PAM-1.6.1.tar.xz",
+          "sha256": "f8923c740159052d719dbfc2a2f81942d68dd34fcaf61c706a02c9b80feeef8e",
+          "type": "archive"
         }
       ]
     },
     {
-      "name" : "HopToDesk",
-      "buildsystem" : "simple",
-      "sources" : [
+      "name": "HopToDesk",
+      "buildsystem": "simple",
+      "sources": [
         {
           "url": "https://www.hoptodesk.com/hoptodesk.deb",
           "sha256": "7da6190d9cbc0be43c379d415cfd43afd73dcf449e614825734e3d50d708fa32",
-          "type" : "file",
+          "type": "file",
           "dest-filename": "hoptodesk.deb"
         },
         {
           "url": "https://gitlab.com/hoptodesk/hoptodesk/-/raw/ab5356ba2ce36e3ee0bab6e30cc051ad07c49ecd/res/logo.svg",
           "sha256": "7107616c5649a5bd952479f02fb4619f764578fa8bcf54c4ea4bc5466244895b",
-          "type" : "file"
+          "type": "file"
         },
         {
           "url": "https://gitlab.com/hoptodesk/hoptodesk/-/raw/8a23180c5be8ee3ad5def877f02d4d460134c55e/flatpak/com.hoptodesk.HopToDesk.metainfo.xml",
           "sha256": "16b2f6e00a88b4431e164c78f823fe92d5c10909a288e2a441e5bfe90168b8b6",
-          "type" : "file"
+          "type": "file"
         },
         {
           "path": "com.hoptodesk.HopToDesk.desktop",
           "type": "file"
         }
       ],
-      "cleanup" : [
+      "cleanup": [
         "/include",
         "/lib/pkgconfig",
         "/share/gtk-doc"
       ],
-      "build-commands" : [
+      "build-commands": [
         "bsdtar -Oxf hoptodesk.deb data.tar.xz | bsdtar -xf -",
         "cp -r ./usr/*  /app/",
         "install -Dm644 com.hoptodesk.HopToDesk.desktop /app/share/applications/com.hoptodesk.HopToDesk.desktop",
@@ -90,5 +90,6 @@
         "install -Dm644 logo.svg /app/share/icons/hicolor/scalable/apps/com.hoptodesk.HopToDesk.svg"
       ]
     }
-  ]
+  ],
+  "version": "1.43.1"
 }
