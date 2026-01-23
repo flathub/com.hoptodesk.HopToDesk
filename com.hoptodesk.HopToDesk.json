@@ -58,7 +58,7 @@
             "sources": [
                 {
                     "url": "https://www.hoptodesk.com/hoptodesk.deb",
-                    "sha256": "7da6190d9cbc0be43c379d415cfd43afd73dcf449e614825734e3d50d708fa32",
+                    "sha256": "06f8a7742e7925ab9731f0127e0401d22341b6d2a3aedf86a61118bbb6572dca",
                     "type": "file",
                     "dest-filename": "hoptodesk.deb"
                 },
