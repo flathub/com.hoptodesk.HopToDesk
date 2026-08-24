@@ -64,7 +64,7 @@
                 {
                     "type" : "file",
                     "url": "https://www.hoptodesk.com/hoptodesk.deb",
-                    "sha256": "fc8e30200d942b8ca1376b80407ca08b0e82f74ef9ebe2b6468d36b5ff3a84cb"
+                    "sha256": "df15bfda878a2874c058f27690348da74ec92415613dc3d371814ba34edd9d07"
                 },
                 {
                     "type" : "file",
