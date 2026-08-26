@@ -1,0 +1,58 @@
+From dd9550b9b093a725d2eaa60370be5d3cca30f28f Mon Sep 17 00:00:00 2001
+From: Sabri Ünal <yakushabb@gmail.com>
+Date: Tue, 9 Jun 2026 14:57:22 +0300
+Subject: [PATCH] Fix appdata paper cuts
+
+Signed-off-by: Sabri Ünal <yakushabb@gmail.com>
+---
+ com.hoptodesk.HopToDesk.metainfo.xml | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/com.hoptodesk.HopToDesk.metainfo.xml b/com.hoptodesk.HopToDesk.metainfo.xml
+index d809e8e..5365d56 100644
+--- a/com.hoptodesk.HopToDesk.metainfo.xml
++++ b/com.hoptodesk.HopToDesk.metainfo.xml
+@@ -3,14 +3,12 @@
+   <id>com.hoptodesk.HopToDesk</id>
+   
+   <name>HopToDesk</name>
+-  <summary>Free Remote Desktop Software. Easily access remote devices securely with end-to-end encryption.</summary>
++  <summary>Easily access remote devices securely with end-to-end encryption</summary>
+ 
+   <developer id="com.hoptodesk">
+     <name>Begonia Holdings</name>
+   </developer>
+-  
+-  <developer_name>Begonia Holdings</developer_name>
+-  
++
+   <metadata_license>FSFAP</metadata_license>
+   <project_license>AGPL-3.0-only</project_license>
+   
+@@ -25,6 +23,8 @@
+   </description>
+ 
+   <url type="homepage">https://www.hoptodesk.com</url>
++  <url type="bugtracker">https://gitlab.com/hoptodesk/hoptodesk/-/work_items</url>
++  <url type="vcs-browser">https://gitlab.com/hoptodesk/hoptodesk</url>
+ 
+   <screenshots>
+     <screenshot type="default">
+@@ -38,10 +38,11 @@
+   <content_rating type="oars-1.1" />
+ 
+   <releases>
++    <release version="1.45.9" date="2026-02-25">
++      <url type="details">https://gitlab.com/hoptodesk/hoptodesk/-/commit/d8839edffaebb27b38a3c6a4f5bf353b33d84d9b</url>
++    </release>
+     <release version="1.41.8" date="2024-04-20">
+       <url type="details">https://gitlab.com/hoptodesk/hoptodesk/-/commit/d8839edffaebb27b38a3c6a4f5bf353b33d84d9b</url>
+-      <description>
+-      </description>
+     </release>
+   </releases>
+ </component>
+\ No newline at end of file
+--
+libgit2 1.7.2
+
