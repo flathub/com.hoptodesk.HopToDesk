@@ -58,7 +58,7 @@
                 "cp -r ./usr/*    /app/",
                 "install -Dm644 com.hoptodesk.HopToDesk.desktop -t /app/share/applications/",
                 "install -Dm644 com.hoptodesk.HopToDesk.metainfo.xml -t /app/share/metainfo/",
-                "install -Dm644 com.hoptodesk.HopToDesk.svg -t /app/share/icons/hicolor/scalable/apps/"
+                "install -Dm644 com.hoptodesk.HopToDesk.png -t /app/share/icons/hicolor/128x128/apps/"
             ],
             "sources" : [
                 {
@@ -67,10 +67,8 @@
                     "sha256": "7582b2ad50352c3481cae565d5399a96dfced6d25d10b4dbd4d0ace20589d9ca"
                 },
                 {
-                    "type" : "file",
-                    "url": "https://gitlab.com/hoptodesk/hoptodesk/-/raw/ab5356ba2ce36e3ee0bab6e30cc051ad07c49ecd/res/logo.svg",
-                    "sha256": "7107616c5649a5bd952479f02fb4619f764578fa8bcf54c4ea4bc5466244895b",
-                    "dest-filename": "com.hoptodesk.HopToDesk.svg"
+                    "type": "file",
+                    "path": "com.hoptodesk.HopToDesk.png"
                 },
                 {
                     "type": "file",
