@@ -10,4 +10,4 @@ Type=Application
 StartupNotify=true
 Categories=Network;RemoteAccess;GTK;
 Keywords=internet;
-
+MimeType=x-scheme-handler/hoptodesk;

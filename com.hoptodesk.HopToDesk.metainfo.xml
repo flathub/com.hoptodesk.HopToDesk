@@ -43,6 +43,7 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="1.46.55" date="2026-10-01"/>
     <release version="1.46.38" date="2026-08-25"/>
     <release version="1.45.9" date="2026-02-25">
       <url type="details">https://gitlab.com/hoptodesk/hoptodesk/-/commit/d8839edffaebb27b38a3c6a4f5bf353b33d84d9b</url>
